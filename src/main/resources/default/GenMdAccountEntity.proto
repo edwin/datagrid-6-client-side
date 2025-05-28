@@ -1,0 +1,62 @@
+// File name: GenMdAccountEntity.proto
+// Scanned classes:
+//   com.edw.model.GenMdAccountEntity
+
+package default;
+
+
+message GenMdAccountEntity {
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional int64 ACCOUNT_ID = 1;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string ACCOUNT_CODE = 2;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional int64 MEMBER_ID = 3;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string CLIENT_CODE = 4;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string ACCOUNT_TYPE = 5;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string CHECK_DIGIT = 6;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string ACCOUNT_NAME = 7;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string ACCOUNT_POSITION = 8;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string CORRESPOND_ACNO = 9;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string BLOCKING_REASON = 10;
+  /*
+  @IndexedField(index = true, store = false)
+  */
+  optional string ACCOUNT_STATUS = 11;
+  optional string CREATED_BY = 12;
+  optional int64 CREATED_ON = 13;
+  optional string MODIFIED_BY = 14;
+  optional int64 MODIFIED_ON = 15;
+  optional string CHECKED_BY = 16;
+  optional int64 checkedOn = 17;
+  optional string approvedBy = 18;
+  optional int64 approvedOn = 19;
+  optional string accountBuyerSeller = 20;
+}
