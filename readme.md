@@ -26,3 +26,21 @@
     </indexing>
 </replicated-cache>
 ```
+
+## JBoss EAP Config
+```
+JAVA_OPTS: -XX:+TieredCompilation -Dprogram.name=clustered.bat -Xms4096m -Xmx4096m 
+-XX:MaxPermSize=512m -Dsun.rmi.dgc.client.gcInterval=3600000 
+-Dsun.rmi.dgc.server.gcInterval=3600000 -Djava.net.preferIPv4Stack=true 
+-Dorg.jboss.resolver.warning=true -Djboss.modules.system.pkgs=org.jboss.byteman 
+-Djboss.server.default.config=clustered.xml
+```
+
+## Duration
+```
+start putting data
+finish putting data for 123935
+
+start querying data
+finish querying data for 16663
+```

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -70,15 +71,19 @@ public class Main {
             ctx.registerProtoFiles(FileDescriptorSource.fromResources("/default/GenMdAccountEntity.proto"));
             ctx.registerMarshaller(new GenMdAccountEntityMarshaller());
 
+            Long timestamp = System.currentTimeMillis();
+
             // put some data
-            for (int i = 0; i < 1000; i++) {
-                remoteCache.put(i, new GenMdAccountEntity(new Random().nextLong(), ""+i, 0l, "111",
+            System.out.println("start putting data");
+            for (int i = 0; i < 1_000_000; i++) {
+                remoteCache.put(UUID.randomUUID().toString(), new GenMdAccountEntity(new Random().nextLong(), ""+i, 0l, "111",
                         "A", "00", "aaa", "2222",
                         "A", "00", "aaa", "2222",
                         null, "00", null, "2222",
                         null, "00", null, "2222"
                 ));
             }
+            System.out.println("finish putting data for "+ (System.currentTimeMillis() - timestamp));
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -103,18 +108,21 @@ public class Main {
             ctx.registerProtoFiles(FileDescriptorSource.fromResources("/default/GenMdAccountEntity.proto"));
             ctx.registerMarshaller(new GenMdAccountEntityMarshaller());
 
+            System.out.println("start querying data");
+            Long timestampBeginning = System.currentTimeMillis();
+
             QueryFactory qf = Search.getQueryFactory(remoteCache);
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 1_000; i++) {
                 Query query = qf.from(GenMdAccountEntity.class)
                         .having("ACCOUNT_CODE").eq(""+i)
                         .toBuilder()
                         .startOffset(0)
                         .maxResults(Integer.MAX_VALUE)
                         .build();
-
-                Long timestamp = System.currentTimeMillis();
-                System.out.println(query.list()+ " ~ " +(System.currentTimeMillis() - timestamp));
+                query.list();
             }
+
+            System.out.println("finish querying data for "+ (System.currentTimeMillis() - timestampBeginning));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
